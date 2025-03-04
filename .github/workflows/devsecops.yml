@@ -15,11 +15,15 @@ jobs:
 
       - name: Run Bandit Security Scan
         uses: pycqa/bandit-action@main
-
-
         with:
           path: src/
           level: high
+
+      - name: Upload Bandit Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: Bandit_Report
+          path: results.sarif
 
   secrets-scan:
     runs-on: ubuntu-latest
@@ -29,7 +33,6 @@ jobs:
 
       - name: Run TruffleHog Secret Scan
         uses: trufflesecurity/trufflehog@main
-
         with:
           path: src/
 
